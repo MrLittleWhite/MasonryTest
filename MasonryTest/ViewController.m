@@ -14,7 +14,6 @@
 @interface ViewController ()
 
 @property (nonatomic, weak) MASConstraint *likeButton2CenterYOffCn;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rectViewTopCn;
 
 @end
 
@@ -69,21 +68,24 @@
     button.selected = !button.selected;
     if (button.tag == 2) {
         
-        //未改进前修改约束方法
+        //未改进前修改priority方法
 //        [self.likeButton2CenterYOffCn uninstall];
 //        [button mas_updateConstraints:^(MASConstraintMaker *make) {
 //            self.likeButton2CenterYOffCn = make.centerY.equalTo(self.view).offset(200).priority(button.selected?750:250);
 //        }];
         
-        //改进后，修改约束方法1
+        //改进后，修改priority方法1
 //        self.likeButton2CenterYOffCn.priority(button.selected?750:250);
         
-        //改进后，修改约束方法2
+        //改进后，修改priority方法2
         [button mas_updateConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.view).offset(200).priority(button.selected?750:250);
         }];
     } else {
-        self.rectViewTopCn.priority = button.selected?UILayoutPriorityDefaultHigh:UILayoutPriorityDefaultLow;
+        //修改constant
+        [button mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self.view).centerOffset(CGPointMake(0, button.selected?-200:-150));
+        }];
     }
 }
 
