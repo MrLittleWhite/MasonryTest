@@ -367,12 +367,14 @@ static char kInstalledConstraintsKey;
         existingConstraint.constant = layoutConstraint.constant;
         
         // update the priority if possible
-        NSAssert(existingConstraint.priority != UILayoutPriorityRequired
-                 && layoutConstraint.priority != UILayoutPriorityRequired,
-                 @"the priority cannot be changed from/to NSLayoutPriorityRequired");
-        if (existingConstraint.priority != UILayoutPriorityRequired
-            && layoutConstraint.priority != UILayoutPriorityRequired){
-            existingConstraint.priority = layoutConstraint.priority;
+        if (existingConstraint.priority != layoutConstraint.priority) {
+            NSAssert(existingConstraint.priority != UILayoutPriorityRequired
+                     && layoutConstraint.priority != UILayoutPriorityRequired,
+                     @"the priority cannot be changed from/to NSLayoutPriorityRequired");
+            if (existingConstraint.priority != UILayoutPriorityRequired
+                && layoutConstraint.priority != UILayoutPriorityRequired){
+                existingConstraint.priority = layoutConstraint.priority;
+            }
         }
         
         self.layoutConstraint = existingConstraint;
