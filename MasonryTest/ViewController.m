@@ -13,7 +13,8 @@
 
 @interface ViewController ()
 
-@property (nonatomic, weak) MASConstraint *likeButton2CenterYOffCn;
+//@property (nonatomic, weak) MASConstraint *likeButton2CenterYOffCn;
+@property (nonatomic, strong) MASConstraint *likeButton2CenterYOffCn;
 
 @end
 
@@ -68,7 +69,13 @@
     button.selected = !button.selected;
     if (button.tag == 2) {
         
-        //未改进前修改priority方法
+        //未改进前修改priority方法1
+//        [self.likeButton2CenterYOffCn deactivate];
+//        self.likeButton2CenterYOffCn.priority(button.selected?750:250);
+//        [self.likeButton2CenterYOffCn activate];
+        
+        
+        //未改进前修改priority方法2
 //        [self.likeButton2CenterYOffCn uninstall];
 //        [button mas_updateConstraints:^(MASConstraintMaker *make) {
 //            self.likeButton2CenterYOffCn = make.centerY.equalTo(self.view).offset(200).priority(button.selected?750:250);
